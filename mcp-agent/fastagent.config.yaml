@@ -1,0 +1,18 @@
+mcp:
+  servers:
+    tshark_mcp:
+      transport: "http"              # HTTP, pas stdio
+      url: "http://localhost:5001/mcp"
+      read_transport_sse_timeout_seconds: 120  # facultatif
+      # headers: { Authorization: "Bearer xxx" }  # si tu protèges ton serveur
+
+agents:
+  netcli:
+    model: gpt-4o-mini
+    servers: [tshark_mcp]            # <- correspond au nom ci-dessus
+    system: |
+      You are a network expert. Always use the tool 'tshark_query' to analyze offline PCAP files.
+
+providers:                            # (tout est optionnel ici)
+  openai:
+    reasoning_effort: "medium"        # low / medium / high

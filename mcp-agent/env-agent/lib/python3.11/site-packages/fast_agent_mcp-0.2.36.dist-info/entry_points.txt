@@ -1,0 +1,6 @@
+[console_scripts]
+fast-agent = mcp_agent.cli.__main__:app
+fast-agent-mcp = mcp_agent.cli.__main__:app
+fastagent = mcp_agent.cli.__main__:app
+prompt-server = mcp_agent.mcp.prompts.__main__:main
+silsila = mcp_agent.cli.__main__:app
