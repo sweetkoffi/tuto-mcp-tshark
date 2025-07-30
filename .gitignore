@@ -1,1 +1,5 @@
 fastagent.secrets.yaml
+env-agent/
+en-mcp/
+__pycache__/
+pcaps/
