@@ -1,3 +1,13 @@
+
+# 🚧 Unstable Branch – `tsark_mcp` Setup & Usage
+
+This branch is **unstable**.  
+It’s where new features are added, tested, and occasionally break things.  
+Expect bugs, experimental code, and rapid changes.  
+If you want stability, use the `main` branch instead.  
+
+---
+
 ## Launching `tsark_mcp`
 
 This guide shows how to launch the `tsark_mcp` FastAPI server using exact terminal commands and sequence.
@@ -19,6 +29,7 @@ cd mcp-srv
 ```
 
 ### Step 3: Create Python virtual environment
+
 
 ```bash
 python -m venv env-mcp 

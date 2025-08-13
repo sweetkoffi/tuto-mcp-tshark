@@ -1,17 +1,28 @@
 mcp:
   servers:
     tshark_mcp:
-      transport: "http"              # HTTP, pas stdio
+      transport: "http"              # HTTP
       url: "http://localhost:5001/mcp"
       read_transport_sse_timeout_seconds: 120  # facultatif
-      # headers: { Authorization: "Bearer xxx" }  # si tu protèges ton serveur
-
+  
+# MCP-Client
 agents:
   netcli:
     model: gpt-4o-mini
-    servers: [tshark_mcp]            # <- correspond au nom ci-dessus
+    servers: [tshark_mcp]           
     system: |
-      You are a network expert. Always use the tool 'tshark_query' to analyze offline PCAP files.
+      Tu es un assistant réseau.
+      — Quand l’utilisateur pose une question :
+      1. Construis les arguments JSON du tool verif_syntax (display‑filter + fichier).
+      2. Appelle verif_syntax.
+      3. Si OK, réponds :
+       • la ligne de commande complète tshark qui serait lancée
+       • une question courte : « J’exécute ? (oui/non) »
+      Attends la réponse de l’utilisateur AVANT d’appeler tshark_query.
+      4. Si l’utilisateur répond oui, appelle tshark_query avec les mêmes
+        arguments (plus fields/limit si utiles) et renvoie la sortie.
+      5. Si la sortie > 10 ko, enchaîne un appel summary avant d’envoyer la réponse.
+      Ne saute jamais une étape. Pas d’appel tshark_query sans OK explicite.
 
 providers:                            # (tout est optionnel ici)
   openai:
